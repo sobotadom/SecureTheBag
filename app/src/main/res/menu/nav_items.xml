@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_me"
+        android:enabled="true"
+        android:icon="@drawable/account_ic"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_groups"
+        android:enabled="true"
+        android:icon="@drawable/group_ic"
+        android:title="Groups"
+        app:showAsAction="ifRoom"
+
+        />
+    <item
+        android:id="@+id/action_settings"
+        android:enabled="true"
+        android:icon="@drawable/settings_ic"
+        android:title="Settings"
+        app:showAsAction="ifRoom" />
+
+</menu>
