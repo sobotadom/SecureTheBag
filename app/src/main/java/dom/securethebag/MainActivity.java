@@ -1,15 +1,11 @@
 package dom.securethebag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.NavigationMenuItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.transition.Fade;
 import android.support.transition.Slide;
-import android.support.transition.Transition;
-import android.support.transition.TransitionInflater;
-import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.github.abdularis.civ.AvatarImageView;
-import com.github.abdularis.civ.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
     private Fragment currentFragment;
@@ -31,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.topbar);
         this.setSupportActionBar(toolbar);
-
         defaultFragment();
 
         //Onchange listner
@@ -48,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 }else if(item.getItemId() == R.id.action_settings){
                     fragmentChange(new SettingsFragment());
                 }
-
-
                 return false;
             }
         });
@@ -57,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onAccountClick(View view){
         AvatarImageView a = (AvatarImageView) view;
-        fragmentChange(new AccountFragment());
+        Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+        startActivity(intent);
     }
 
     private void defaultFragment(){
@@ -74,32 +67,21 @@ public class MainActivity extends AppCompatActivity {
     private void fragmentChange(Fragment dest){
         if ((dest instanceof DashboardFragment) && (currentFragment instanceof DashboardFragment)){}
         else if((dest instanceof GroupsFragment) && (currentFragment instanceof GroupsFragment)){}
-        else if((dest instanceof AccountFragment) && (currentFragment instanceof AccountFragment)){}
         else if((dest instanceof SettingsFragment) && (currentFragment instanceof SettingsFragment)){}
         else{
             transitionFragment(dest);
         }
-
-
     }
-
     private void transitionFragment(Fragment dest){
-
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // Replace the layout holder with the required Fragment object.
         Fade exitFade = new Fade();
         exitFade.setDuration(500);
         currentFragment.setExitTransition(exitFade);
-
-
         // 3. Enter Transition for New Fragment
         Slide enterSlide = new Slide();
-        if (dest instanceof AccountFragment){
-            enterSlide.setSlideEdge(Gravity.BOTTOM);
-        }else{
-            enterSlide.setSlideEdge(Gravity.START);
-        }
+        enterSlide.setSlideEdge(Gravity.START);
         enterSlide.setStartDelay(250);
         enterSlide.setDuration(250);
         dest.setEnterTransition(enterSlide);

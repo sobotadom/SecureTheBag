@@ -26,6 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER"></category>
             </intent-filter>
         </activity>
+        <activity android:name=".RegisterActivity" android:theme="@style/Bag" ></activity>
+        <activity android:name=".AccountActivity" android:theme="@style/Bag"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
